@@ -1,11 +1,30 @@
-const add = (req, res) => {
+const tables = require("../../database/tables")
+
+
+
+const add = async (req, res) => {
 
   const { email, password } = req.body;
 
+  try {
 
-  res.json({
-    message : `Email : ${email}, Password: ${password}`
-  })
+    const insertId = await tables.user.create({ email, password})
+
+    res.json({
+      message: "User created",
+      insertId : insertId
+    })
+
+  } catch(e) {
+    console.error(e)
+
+    res.json({
+      error : e.message
+    })
+  }
+
+
+
 
 }
 
