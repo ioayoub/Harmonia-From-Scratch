@@ -4,11 +4,13 @@ const tables = require("../../database/tables")
 
 const add = async (req, res) => {
 
-  const { email, password } = req.body;
+  console.log(req.body)
+
+  const { email, firstname, lastname, password } = req.body;
 
   try {
 
-    const insertId = await tables.user.create({ email, password})
+    const insertId = await tables.user.create({ email, firstname, lastname, password})
 
     res.json({
       message: "User created",
